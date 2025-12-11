@@ -1,0 +1,22 @@
+{
+  "name": "env-manager",
+  "version": "1.0.0",
+  "description": "Simple CLI to sync .env files securely",
+  "main": "index.js",
+  "bin": {
+    "env-manager": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2",
+    "inquirer": "^13.0.2"
+  }
+}
