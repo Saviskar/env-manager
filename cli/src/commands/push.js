@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
-const { createApiClient } = require('../utils/apiClient');
-const { readProjectConfig } = require('../utils/projectConfig');
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
+import { createApiClient } from '../utils/apiClient.js';
+import { readProjectConfig } from '../utils/projectConfig.js';
 
 /**
  * Pushes the local .env content to the remote vault.
@@ -10,10 +10,10 @@ const { readProjectConfig } = require('../utils/projectConfig');
  * @param {string} environment - The target environment (e.g. 'development')
  * 
  * Workflow:
- * 1. VALIDATES that the project is initialized (.envmng.json exists).
- * 2. VERIFIES that the target environment is allowed in the config.
- * 3. READS the raw content of the local `.env` file.
- * 4. SENDS content + projectId + env to the backend.
+ * 1. Validates that the project is initialized (.envmng.json exists).
+ * 2. Verifies that the target environment is allowed in the config.
+ * 3. Reads the raw content of the local `.env` file.
+ * 4. Sends content + projectId + env to the backend.
  */
 async function push(environment) {
   // 1. Validation
@@ -55,4 +55,4 @@ async function push(environment) {
   }
 }
 
-module.exports = push;
+export default push;

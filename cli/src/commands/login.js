@@ -1,6 +1,6 @@
-const inquirer = require('inquirer');
-const chalk = require('chalk');
-const { writeGlobalConfig } = require('../utils/config');
+import inquirer from 'inquirer';
+import chalk from 'chalk';
+import { writeGlobalConfig } from '../utils/config.js';
 
 async function login() {
   console.log(chalk.blue.bold('envmng login'));
@@ -28,4 +28,4 @@ async function login() {
   console.log(chalk.green('✔ Configuration saved!'));
 }
 
-module.exports = login;
+export default login;

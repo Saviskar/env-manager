@@ -1,5 +1,7 @@
-const { Pool } = require('pg');
-const { encrypt, decrypt } = require('./cryptoService');
+import pg from 'pg';
+import { encrypt, decrypt } from './cryptoService.js';
+
+const { Pool } = pg;
 
 // DB CONNECTION:
 // Uses pg connection pool for better performance and scalability.
@@ -12,7 +14,7 @@ const pool = new Pool({
  * @param {string} name - User-friendly project name.
  * @param {string[]} environments - Array of env names (e.g. ['development', 'production']).
  */
-async function createProject(name, environments) {
+export async function createProject(name, environments) {
   const res = await pool.query(
     'INSERT INTO projects (name, environments) VALUES ($1, $2) RETURNING *',
     [name, environments]
@@ -20,7 +22,7 @@ async function createProject(name, environments) {
   return res.rows[0];
 }
 
-async function getProject(id) {
+export async function getProject(id) {
   const res = await pool.query('SELECT * FROM projects WHERE id = $1', [id]);
   return res.rows[0];
 }
@@ -34,7 +36,7 @@ async function getProject(id) {
  * 4. Encrypts and saves the new content.
  * 5. Commits.
  */
-async function pushEnv(projectId, environment, rawContent) {
+export async function pushEnv(projectId, environment, rawContent) {
     const client = await pool.connect();
     try {
         await client.query('BEGIN');
@@ -69,7 +71,7 @@ async function pushEnv(projectId, environment, rawContent) {
  * 1. Fetches the row with the highest version number.
  * 2. Decrypts the content before returning.
  */
-async function pullEnv(projectId, environment) {
+export async function pullEnv(projectId, environment) {
     const res = await pool.query(
         'SELECT * FROM env_versions WHERE project_id = $1 AND environment = $2 ORDER BY version DESC LIMIT 1',
         [projectId, environment]
@@ -85,10 +87,3 @@ async function pullEnv(projectId, environment) {
     const decrypted = decrypt(record.encrypted_content);
     return { ...record, envContent: decrypted };
 }
-
-module.exports = {
-  createProject,
-  getProject,
-  pushEnv,
-  pullEnv
-};

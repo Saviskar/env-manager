@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import * as envService from '../services/envService.js';
+
 const router = express.Router();
-const envService = require('../services/envService');
 
 /**
  * POST /env/push
@@ -48,4 +49,4 @@ router.get('/pull', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

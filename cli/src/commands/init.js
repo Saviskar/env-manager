@@ -1,18 +1,17 @@
-const inquirer = require('inquirer');
-const chalk = require('chalk');
-const path = require('path');
-const { createApiClient } = require('../utils/apiClient');
-const { writeProjectConfig, readProjectConfig } = require('../utils/projectConfig');
-const { readGlobalConfig } = require('../utils/config');
+import inquirer from 'inquirer';
+import chalk from 'chalk';
+import path from 'path';
+import { createApiClient } from '../utils/apiClient.js';
+import { writeProjectConfig, readProjectConfig } from '../utils/projectConfig.js';
+import { readGlobalConfig } from '../utils/config.js';
 
 /**
  * Initializes a new project in the current directory.
- * 
- * Workflow:
- * 1. CHECKS if a project config (.envmng.json) already exists.
- * 2. PROMPTS the user for project name and environments.
+ * workflow:
+ * 1. Checks if a project config (.envmng.json) already exists.
+ * 2. Prompts the user for project name and environments.
  * 3. API CALL to create the project in the backend DB.
- * 4. WRITES the received Project ID and config to .envmng.json locally.
+ * 4. Writes the received Project ID and config to .envmng.json locally.
  */
 async function init() {
   // 1. Check if already initialized
@@ -74,4 +73,4 @@ async function init() {
   }
 }
 
-module.exports = init;
+export default init;

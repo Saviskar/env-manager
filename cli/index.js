@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const { Command } = require('commander');
-const login = require('./src/commands/login');
-const init = require('./src/commands/init');
-const push = require('./src/commands/push');
-const pull = require('./src/commands/pull');
+import { Command } from 'commander';
+import login from './src/commands/login.js';
+import init from './src/commands/init.js';
+import push from './src/commands/push.js';
+import pull from './src/commands/pull.js';
 
 const program = new Command();
 

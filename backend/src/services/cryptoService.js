@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'crypto';
 
 // ALGORITHM: AES-256-CBC is a robust symmetric encryption algorithm.
 // We use it to ensure that environment variables are stored securely efficiently.
@@ -22,7 +22,7 @@ const IV_LENGTH = 16;
  * @param {string} text - The raw environment content to encrypt.
  * @returns {string} - The encrypted string in format "IV:EncryptedData" (hex encoded).
  */
-function encrypt(text) {
+export function encrypt(text) {
   const iv = crypto.randomBytes(IV_LENGTH);
   const cipher = crypto.createCipheriv(ALGORITHM, Buffer.from(ENCRYPTION_KEY), iv);
   let encrypted = cipher.update(text);
@@ -36,7 +36,7 @@ function encrypt(text) {
  * @param {string} text - The "IV:EncryptedData" string.
  * @returns {string} - The original plain text.
  */
-function decrypt(text) {
+export function decrypt(text) {
   const textParts = text.split(':');
   // Extract IV (first part)
   const iv = Buffer.from(textParts.shift(), 'hex');
@@ -49,5 +49,3 @@ function decrypt(text) {
   
   return decrypted.toString();
 }
-
-module.exports = { encrypt, decrypt };

@@ -1,7 +1,7 @@
-const axios = require('axios');
-const { readGlobalConfig } = require('./config');
+import axios from 'axios';
+import { readGlobalConfig } from './config.js';
 
-function createApiClient() {
+export function createApiClient() {
   const config = readGlobalConfig();
   const baseURL = config.apiBaseUrl;
 
@@ -19,7 +19,3 @@ function createApiClient() {
 
   return client;
 }
-
-module.exports = {
-  createApiClient,
-};

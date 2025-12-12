@@ -1,6 +1,7 @@
 {
   "name": "envmng",
   "version": "1.0.0",
+  "type": "module",
   "description": "CLI for envmng secrets sync tool",
   "main": "index.js",
   "bin": {
