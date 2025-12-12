@@ -1,9 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 const PROJECT_CONFIG_FILE = '.envmng.json';
 
-function readProjectConfig(cwd = process.cwd()) {
+export function readProjectConfig(cwd = process.cwd()) {
   const filePath = path.join(cwd, PROJECT_CONFIG_FILE);
   if (!fs.existsSync(filePath)) {
     return null;
@@ -16,12 +16,7 @@ function readProjectConfig(cwd = process.cwd()) {
   }
 }
 
-function writeProjectConfig(config, cwd = process.cwd()) {
+export function writeProjectConfig(config, cwd = process.cwd()) {
   const filePath = path.join(cwd, PROJECT_CONFIG_FILE);
   fs.writeFileSync(filePath, JSON.stringify(config, null, 2));
 }
-
-module.exports = {
-  readProjectConfig,
-  writeProjectConfig,
-};

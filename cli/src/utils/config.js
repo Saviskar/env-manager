@@ -1,6 +1,6 @@
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
 
 const CONFIG_DIR = path.join(os.homedir(), '.envmng');
 const CONFIG_FILE = path.join(CONFIG_DIR, 'config.json');
@@ -11,7 +11,7 @@ function ensureConfigDir() {
   }
 }
 
-function readGlobalConfig() {
+export function readGlobalConfig() {
   if (!fs.existsSync(CONFIG_FILE)) {
     return {};
   }
@@ -23,14 +23,9 @@ function readGlobalConfig() {
   }
 }
 
-function writeGlobalConfig(config) {
+export function writeGlobalConfig(config) {
   ensureConfigDir();
   const currentConfig = readGlobalConfig();
   const newConfig = { ...currentConfig, ...config };
   fs.writeFileSync(CONFIG_FILE, JSON.stringify(newConfig, null, 2));
 }
-
-module.exports = {
-  readGlobalConfig,
-  writeGlobalConfig,
-};

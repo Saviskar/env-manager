@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const chalk = require('chalk');
-const { createApiClient } = require('../utils/apiClient');
-const { readProjectConfig } = require('../utils/projectConfig');
+import fs from 'fs';
+import path from 'path';
+import chalk from 'chalk';
+import { createApiClient } from '../utils/apiClient.js';
+import { readProjectConfig } from '../utils/projectConfig.js';
 
 /**
  * Pulls the latest secret version from the vault and writes to .env.
@@ -10,9 +10,9 @@ const { readProjectConfig } = require('../utils/projectConfig');
  * @param {string} environment - The target environment to fetch (e.g. 'production')
  * 
  * Workflow:
- * 1. CHECK for project initialization.
- * 2. REQUEST latest env version from Backend API.
- * 3. OVERWRITE local `.env` file with the received content.
+ * 1. Check for project initialization.
+ * 2. Request latest env version from Backend API.
+ * 3. Overwrite local `.env` file with the received content.
  */
 async function pull(environment) {
   const projectConfig = readProjectConfig();
@@ -52,4 +52,4 @@ async function pull(environment) {
   }
 }
 
-module.exports = pull;
+export default pull;
